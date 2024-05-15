@@ -26,7 +26,7 @@
     - Painted by Vincent van Gogh in 1889
     - Captures the east-facing view of van Gogh's room in Saint-Rémy-de-Provence
 
-5. Subject: Physics
+5. Subject: Maths
    Category: Science
    Facts:
     - The sun doesn't change color during sunset.

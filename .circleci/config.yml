@@ -7,7 +7,6 @@ workflows:
     jobs:
       - run-commit-evals:
           context:
-            - ai-eval-examples
             - OpenAI
 
 jobs:

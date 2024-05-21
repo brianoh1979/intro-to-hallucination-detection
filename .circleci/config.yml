@@ -22,6 +22,6 @@ jobs:
           pkg-manager: pip
       - run:
           name: Run assistant evals.
-          command: python -m pytest --junitxml results.xml test_hallucinations.py
+          command: python -m pytest --junitxml results.xml test_hallucinations2.py
       - store_test_results:
           path: results.xml

@@ -22,6 +22,9 @@ jobs:
           pkg-manager: pip
       - run:
           name: Run assistant evals.
-          command: python -m pytest --junitxml results.xml test_hallucinations2.py
+          command: |
+            set -e
+            TESTFILES=$(circleci tests glob "**/test_hallucinations*.py" | circleci tests split)
+            python -m pytest --junitxml results.xml $TESTFILES
       - store_test_results:
           path: results.xml

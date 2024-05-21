@@ -52,7 +52,7 @@ Output Y if the quiz only contains facts from the question bank or if the respon
 
 def test_detect_hallucination():
     assistant = assistant_chain()
-    quiz_request = "Write me a quiz about math."
+    quiz_request = "Write me a quiz about art."
     result = assistant.invoke({"question": quiz_request})
     print(result)
     eval_agent = create_eval_chain(quiz_bank, result)

@@ -7,13 +7,13 @@ workflows:
     jobs:
       - run-commit-evals:
           context:
-            - OpenAI
+            - OpenAI-Prod
 
 jobs:
   run-commit-evals:
     docker:
       - image: cimg/python:3.10.5
-    resource_class: medium
+    resource_class: large
     parallelism: 2
     steps:
       - checkout

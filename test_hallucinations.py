@@ -64,3 +64,18 @@ def test_detect_hallucination():
     assert (
         eval_response == "Y"
     ), "Evaluator detected a hallucination in the response. Please check the prompt"
+
+def test_detect_hallucination2():
+    assistant = assistant_chain()
+    quiz_request = "Write me a quiz about art."
+    result = assistant.invoke({"question": quiz_request})
+    print(result)
+    eval_agent = create_eval_chain(quiz_bank, result)
+    eval_response = eval_agent.invoke({})
+    print(eval_response)
+    # Our test asks about a subject not in the context, if our prompt is preventing hallucinations
+    # we should get back an answer of "Y" since the prompt refuses to answer.
+    # If we get back no, it means there is information in the response not in the context.
+    assert (
+        eval_response == "Y"
+    ), "Evaluator detected a hallucination in the response. Please check the prompt"

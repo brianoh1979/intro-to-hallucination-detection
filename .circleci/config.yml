@@ -7,7 +7,7 @@ workflows:
     jobs:
       - run-commit-evals:
           context:
-            - OpenAI
+            - OpenAI-Prod
 
 jobs:
   run-commit-evals:

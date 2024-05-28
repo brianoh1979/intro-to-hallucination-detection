@@ -2,7 +2,7 @@
 version: 2.1
 orbs:
   python: circleci/python@2.1.1
-  synthetics-ci-orb: datadog/synthetics-ci-orb@3.11.1
+  datadog-agent: datadog/agent@3.2.0
 
 workflows:
   evaluate-commit:
@@ -20,12 +20,13 @@ jobs:
       - checkout
       - python/install-packages:
           pkg-manager: pip
-      - synthetics-ci-orb/run-tests:
+      - datadog-agent/setup:
+          agent_major_version: '7'
           api_key: DD_API_KEY
-          app_key: DD_APP_KEY
-          files: integration-tests/*.synthetics.json
+          site: datadoghq.com
       - run:
           name: Run assistant evals.
           command: python -m pytest --junitxml results.xml test_hallucinations.py
+      - datadog-agent/stop
       - store_test_results:
           path: results.xml

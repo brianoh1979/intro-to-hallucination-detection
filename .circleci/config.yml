@@ -23,7 +23,7 @@ jobs:
       - datadog-agent/setup:
           agent_major_version: '7'
           api_key: DD_API_KEY
-          site: datadoghq.com
+          site: datadoghq.eu
       - run:
           name: Run assistant evals.
           command: python -m pytest --junitxml results.xml test_hallucinations.py

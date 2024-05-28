@@ -2,7 +2,7 @@
 version: 2.1
 orbs:
   python: circleci/python@2.1.1
-  datadog-static-analysis: datadog/datadog-static-analyzer-circleci-orb@1
+  synthetics-ci-orb: datadog/synthetics-ci-orb@3.11.1
 
 workflows:
   evaluate-commit:
@@ -18,17 +18,12 @@ jobs:
       - image: cimg/python:3.11.9-node
     steps:
       - checkout
- #     - run: curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
- #     - run: sudo apt-get update && sudo apt-get upgrade && sudo apt-get install synaptic aptitude
- #     - run: sudo apt-get install -y nodejs
- #     - run: sudo apt-get install -y build-essential
- #     - run: sudo apt-get update && sudo apt-get upgrade && sudo aptitude install npm
       - python/install-packages:
           pkg-manager: pip
-      - datadog-static-analysis/analyze:
-          cpu_count: 2
-          enable_performance_statistics: false
-          service: my-service
+      - synthetics-ci-orb/run-tests:
+          api_key: DD_API_KEY
+          app_key: DD_APP_KEY
+          files: integration-tests/*.synthetics.json
       - run:
           name: Run assistant evals.
           command: python -m pytest --junitxml results.xml test_hallucinations.py

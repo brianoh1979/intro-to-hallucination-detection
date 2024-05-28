@@ -18,6 +18,7 @@ jobs:
       - image: cimg/python:3.11.9-node
     steps:
       - checkout
+      - run: curl www.datadoghq.com
       - python/install-packages:
           pkg-manager: pip
       - datadog-agent/setup:
